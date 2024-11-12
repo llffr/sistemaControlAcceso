@@ -62,9 +62,10 @@ public class clsPersonaDao {
 	//"internal jFrame Persona". busqueda por apellido 
 	public void BuscarPersonalDao(PersonaMod p) {
 		try {
-			String[] titulo = {"id", "dni", "nombre", "apellidos",
+			//establece columnas de la tabla
+			String[] titulo = {"dni", "nombre", "apellidos",
 				"telefono", "cargo"};
-			CallableStatement cst = con.prepareCall("{call pa_filtrarDatosPersonal(?)}");
+			CallableStatement cst = con.prepareCall("{call pa_buscarPersonalApellido(?)}");
 			DefaultTableModel model = new DefaultTableModel(null, titulo);
 			frmPersona.tbPersonal.setModel(model);
 
@@ -72,13 +73,13 @@ public class clsPersonaDao {
 			rs = cst.executeQuery();
 			String[] fila = new String[6];
 
+			//añade nombre de columnas a la tabla
 			while (rs.next()) {
 				fila[0] = rs.getString(1);
 				fila[1] = rs.getString(2);
 				fila[2] = rs.getString(3);
 				fila[3] = rs.getString(4);
 				fila[4] = rs.getString(5);
-				fila[5] = rs.getString(6);
 				model.addRow(fila);
 			}
 		} catch (Exception e) {
@@ -115,12 +116,10 @@ public class clsPersonaDao {
 			cst.setString(1, p.getDNI());
 
 			int rpt = cst.executeUpdate();
-
 			//evalua si se ingreso datos
 			if (rpt == 1) {
 				JOptionPane.showMessageDialog(null, "Registrado Correctamente", "Sistema", JOptionPane.INFORMATION_MESSAGE);
 			}
-
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error: " + e);
 		}
@@ -137,12 +136,10 @@ public class clsPersonaDao {
 			cst.setString(6, p.getCLAVE());
 
 			int rpt = cst.executeUpdate();
-
 			//evalua si se ingreso datos
 			if (rpt == 1) {
 				JOptionPane.showMessageDialog(null, "Registrado Correctamente", "Sistema", JOptionPane.INFORMATION_MESSAGE);
 			}
-
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error: " + e);
 		}

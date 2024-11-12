@@ -10,8 +10,8 @@ import javax.swing.JOptionPane;
 
 public class frmLogin extends javax.swing.JFrame {
 
-	clsPersonaDao odao = new clsPersonaDao();
-	PersonaMod en = new PersonaMod(); //props persona table
+	clsPersonaDao persdao = new clsPersonaDao();
+	PersonaMod persmod = new PersonaMod(); //props persona table
 
 	public frmLogin() {
 		initComponents();
@@ -123,10 +123,10 @@ public class frmLogin extends javax.swing.JFrame {
 
 	//login button
         private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-		en.setDNI(txtUsuario.getText());
-		en.setCLAVE(txtClave.getText());
+		persmod.setDNI(txtUsuario.getText());
+		persmod.setCLAVE(txtClave.getText());
 
-		if (odao.AccesoSistema(en) == true) {
+		if (persdao.AccesoSistema(persmod) == true) {
 			JOptionPane.showMessageDialog(null, "Bienvenido: " + txtUsuario.getText(), "Sistemas", JOptionPane.INFORMATION_MESSAGE);
 			Principal p = new Principal();
 			p.show();

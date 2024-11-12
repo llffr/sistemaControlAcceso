@@ -7,14 +7,10 @@ package vista;
 import Dao.clsPersonaDao;
 import Modelo.PersonaMod;
 
-/**
- *
- * @author fernd
- */
 public class Asistencia extends javax.swing.JInternalFrame {
 
-	clsPersonaDao dao= new clsPersonaDao();
-	PersonaMod pers= new PersonaMod();
+	clsPersonaDao dao = new clsPersonaDao();
+	PersonaMod pers = new PersonaMod();
 
 	public Asistencia() {
 		initComponents();
@@ -36,7 +32,6 @@ public class Asistencia extends javax.swing.JInternalFrame {
 
                 jLabel1.setText("N° DNI:");
 
-                txtdniMarcacion.setText("jTextField1");
                 txtdniMarcacion.addKeyListener(new java.awt.event.KeyAdapter() {
                         public void keyPressed(java.awt.event.KeyEvent evt) {
                                 txtdniMarcacionKeyPressed(evt);
@@ -48,11 +43,11 @@ public class Asistencia extends javax.swing.JInternalFrame {
                 jPanel1Layout.setHorizontalGroup(
                         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
+                                .addGap(130, 130, 130)
                                 .addComponent(jLabel1)
-                                .addGap(100, 100, 100)
+                                .addGap(120, 120, 120)
                                 .addComponent(txtdniMarcacion, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addContainerGap(134, Short.MAX_VALUE))
                 );
                 jPanel1Layout.setVerticalGroup(
                         jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,7 +63,7 @@ public class Asistencia extends javax.swing.JInternalFrame {
                 jPanel2.setLayout(jPanel2Layout);
                 jPanel2Layout.setHorizontalGroup(
                         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 658, Short.MAX_VALUE)
+                        .addGap(0, 737, Short.MAX_VALUE)
                 );
                 jPanel2Layout.setVerticalGroup(
                         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,19 +80,21 @@ public class Asistencia extends javax.swing.JInternalFrame {
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
+                                .addGap(87, 87, 87)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(72, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 );
 
                 pack();
         }// </editor-fold>//GEN-END:initComponents
 
         private void txtdniMarcacionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdniMarcacionKeyPressed
-		pers.setDNI(txtdniMarcacion.getText());
-		dao.marcarAsistencia(pers);
+		if (txtdniMarcacion.getText().length() == 8) {
+			pers.setDNI(txtdniMarcacion.getText());
+			dao.marcarAsistencia(pers);
+		}
         }//GEN-LAST:event_txtdniMarcacionKeyPressed
 
 

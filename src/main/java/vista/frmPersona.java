@@ -8,6 +8,7 @@ package vista;
 import Dao.clsCargoDao;
 import Dao.clsPersonaDao;
 import Modelo.PersonaMod;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 //internal jframe
@@ -17,14 +18,13 @@ public class frmPersona extends javax.swing.JInternalFrame {
 	 * Creates new form frmPersona
 	 */
 	PersonaMod pers = new PersonaMod(); //props persona table
-	clsPersonaDao dao = new clsPersonaDao();
+	clsPersonaDao persDao = new clsPersonaDao();
 	clsCargoDao cargDao = new clsCargoDao();
 
 	public frmPersona() {
 		initComponents();
 		cmbCargo.removeAllItems();
-		dao.llenarCargo();
-		cargDao.ListarPersonas();
+		persDao.llenarCargo();
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
                 txttelf = new javax.swing.JTextField();
                 cmbCargo = new javax.swing.JComboBox<>();
                 btnEliminar = new javax.swing.JButton();
-                jButton6 = new javax.swing.JButton();
+                btnExit = new javax.swing.JButton();
                 jLabel2 = new javax.swing.JLabel();
                 jLabel3 = new javax.swing.JLabel();
                 jLabel4 = new javax.swing.JLabel();
@@ -63,8 +63,6 @@ public class frmPersona extends javax.swing.JInternalFrame {
                 txtclave = new javax.swing.JTextField();
 
                 jLabel1.setText("Nombre del Personal:");
-
-                txtBuscar.setText("jTextField1");
 
                 btnBuscar.setText("Buscar");
                 btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,10 +140,10 @@ public class frmPersona extends javax.swing.JInternalFrame {
                         }
                 });
 
-                jButton6.setText("Salir");
-                jButton6.addActionListener(new java.awt.event.ActionListener() {
+                btnExit.setText("Salir");
+                btnExit.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jButton6ActionPerformed(evt);
+                                btnExitActionPerformed(evt);
                         }
                 });
 
@@ -191,7 +189,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
                                                         .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(11, 11, 11)
-                                                .addComponent(jButton6))
+                                                .addComponent(btnExit))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(jLabel8)
@@ -242,7 +240,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
                                         .addComponent(jLabel8)
                                         .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(116, 116, 116)
-                                .addComponent(jButton6)
+                                .addComponent(btnExit)
                                 .addGap(43, 43, 43))
                 );
 
@@ -266,16 +264,18 @@ public class frmPersona extends javax.swing.JInternalFrame {
         }// </editor-fold>//GEN-END:initComponents
 
         private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-                //datos vacios
+		//datos vacios
 		if (txtBuscar.getText().equals("")) {
 			//txtBuscar.requestFocus();
 			cargDao.ListarPersonas();
 			return;
+		} else {
+			pers.setDNI(txtBuscar.getText());
+			persDao.BuscarPersonalDao(pers);
 		}
-		pers.setDNI(txtBuscar.getText());
-		dao.BuscarPersonalDao(pers);
         }//GEN-LAST:event_btnBuscarActionPerformed
 
+	//click en tabla para poder actualizar o eliminar
         private void tbPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPersonalMouseClicked
 		if (tbPersonal.getSelectedRow() != -1) {
 			int fila = tbPersonal.getSelectedRow();
@@ -287,27 +287,28 @@ public class frmPersona extends javax.swing.JInternalFrame {
 			this.cmbCargo.setSelectedItem(tbPersonal.getValueAt(fila, 4));
 			//despues de hacer click cambia de pestaña
 			jTabbedPane1.setSelectedIndex(1);
+			txtdni.setEditable(false);
 		}
         }//GEN-LAST:event_tbPersonalMouseClicked
 
-        private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        }//GEN-LAST:event_jButton6ActionPerformed
+        private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+		dispose();
+        }//GEN-LAST:event_btnExitActionPerformed
 
         private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-                //datos vacios
+		//datos vacios
 		if (txtdni.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "No olvide ingresar los datos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 			txtdni.requestFocus();
 			return;
 		}
-
 		pers.setDNI(txtdni.getText());
 		pers.setNOMBRE(txtnom.getText());
 		pers.setAPELLIDOS(txtape.getText());
 		pers.setTELF(txttelf.getText());
 		pers.setIDCARGO(cmbCargo.getSelectedIndex());
 		pers.setCLAVE(txtclave.getText());
-		dao.registrarPersonal(pers);
+		persDao.registrarPersonal(pers);
         }//GEN-LAST:event_btnRegistroActionPerformed
 
         private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -322,7 +323,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
 		pers.setTELF(txttelf.getText());
 		pers.setIDCARGO(cmbCargo.getSelectedIndex());
 		pers.setCLAVE(txtclave.getText());
-		dao.actualizarPersonal(pers);
+		persDao.actualizarPersonal(pers);
         }//GEN-LAST:event_btnActualizarActionPerformed
 
         private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -332,7 +333,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
 			return;
 		}
 		pers.setDNI(txtdni.getText());
-		dao.eliminarPersonal(pers);
+		persDao.eliminarPersonal(pers);
         }//GEN-LAST:event_btnEliminarActionPerformed
 
 
@@ -340,9 +341,9 @@ public class frmPersona extends javax.swing.JInternalFrame {
         private javax.swing.JButton btnActualizar;
         private javax.swing.JButton btnBuscar;
         private javax.swing.JButton btnEliminar;
+        private javax.swing.JButton btnExit;
         private javax.swing.JButton btnRegistro;
         public static javax.swing.JComboBox<String> cmbCargo;
-        private javax.swing.JButton jButton6;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
         private javax.swing.JLabel jLabel3;
