@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import vista.frmConsultaMarcacion;
 import vista.frmPersona;
 
 public class clsPersonaDao {
@@ -71,7 +72,7 @@ public class clsPersonaDao {
 
 			cst.setString(1, p.getDNI());
 			rs = cst.executeQuery();
-			String[] fila = new String[6];
+			String[] fila = new String[5];
 
 			//añade nombre de columnas a la tabla
 			while (rs.next()) {
@@ -159,6 +160,35 @@ public class clsPersonaDao {
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error: " + e);
+		}
+	}
+
+	public void consultaxFecha(PersonaMod usu) {
+		try {
+			String[] titulo = {"DNI", "APELLIDOS y NOMBRES", "FECHA", "HORA INGRESO", "HORA SALIDA", "HORA INGRESO2", "HORA SALIDA2", "HORAS TOTALES"};
+			CallableStatement cst = con.prepareCall("{call pa_consultaAsistenciaxFecha(?,?,?)}");
+			DefaultTableModel modelo = new DefaultTableModel(null, titulo);
+			frmConsultaMarcacion.jTable1.setModel(modelo);
+			cst.setString(1, usu.getF1());
+			cst.setString(2, usu.getF2());
+			cst.setString(3, usu.getAPELLIDOS());
+
+			rs = cst.executeQuery();
+			String[] fila = new String[8];
+			while (rs.next()) {
+				fila[0] = rs.getString(1);
+				fila[1] = rs.getString(2);
+				fila[2] = rs.getString(3);
+				fila[3] = rs.getString(4);
+				fila[4] = rs.getString(5);
+				fila[5] = rs.getString(6);
+				fila[6] = rs.getString(7);
+				fila[7] = rs.getString(8);
+				//ingresa los nombres de las columnas 
+				modelo.addRow(fila);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e.toString());
 		}
 	}
 

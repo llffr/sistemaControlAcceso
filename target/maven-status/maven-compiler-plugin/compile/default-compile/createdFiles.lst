@@ -5,6 +5,7 @@ vista\frmPersona$6.class
 Dao\clsCargoDao.class
 vista\frmPersona$1.class
 vista\frmPersona.class
+vista\Principal$5.class
 vista\Principal$3.class
 vista\frmLogin$2.class
 Modelo\Cargo.class
@@ -12,11 +13,13 @@ vista\frmPersona$2.class
 vista\frmCargo$3.class
 Dao\clsPersonaDao.class
 vista\Asistencia$1.class
+vista\frmConsultaMarcacion$1.class
 vista\frmPersona$5.class
 vista\frmLogin.class
 Modelo\PersonaMod.class
 vista\Principal$1.class
 vista\frmCargo$2.class
+vista\frmConsultaMarcacion.class
 vista\Asistencia.class
 vista\Principal$2.class
 vista\Principal$4.class

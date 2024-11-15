@@ -94,6 +94,7 @@ public class Asistencia extends javax.swing.JInternalFrame {
 		if (txtdniMarcacion.getText().length() == 8) {
 			pers.setDNI(txtdniMarcacion.getText());
 			dao.marcarAsistencia(pers);
+                        txtdniMarcacion.setText("");
 		}
         }//GEN-LAST:event_txtdniMarcacionKeyPressed
 
