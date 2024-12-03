@@ -23,6 +23,8 @@ public class Principal extends javax.swing.JFrame {
         // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
         private void initComponents() {
 
+                jMenuItem3 = new javax.swing.JMenuItem();
+                jMenuItem5 = new javax.swing.JMenuItem();
                 jDesktopPane1 = new javax.swing.JDesktopPane();
                 jMenuBar1 = new javax.swing.JMenuBar();
                 jMenu1 = new javax.swing.JMenu();
@@ -31,7 +33,11 @@ public class Principal extends javax.swing.JFrame {
                 jMenu2 = new javax.swing.JMenu();
                 Marcación = new javax.swing.JMenuItem();
                 jMenu3 = new javax.swing.JMenu();
-                jMenuItem3 = new javax.swing.JMenuItem();
+                jMenuItem4 = new javax.swing.JMenuItem();
+
+                jMenuItem3.setText("jMenuItem3");
+
+                jMenuItem5.setText("jMenuItem5");
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,15 +84,15 @@ public class Principal extends javax.swing.JFrame {
 
                 jMenuBar1.add(jMenu2);
 
-                jMenu3.setText("Consulta");
+                jMenu3.setText("Consultas");
 
-                jMenuItem3.setText("jMenuItem3");
-                jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+                jMenuItem4.setText("Fechas");
+                jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jMenuItem3ActionPerformed(evt);
+                                jMenuItem4ActionPerformed(evt);
                         }
                 });
-                jMenu3.add(jMenuItem3);
+                jMenu3.add(jMenuItem4);
 
                 jMenuBar1.add(jMenu3);
 
@@ -128,11 +134,11 @@ public class Principal extends javax.swing.JFrame {
 		asist.show();
         }//GEN-LAST:event_MarcaciónActionPerformed
 
-        private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-		frmConsultaMarcacion consulta= new frmConsultaMarcacion();
-		jDesktopPane1.add(consulta);
-		consulta.show();
-        }//GEN-LAST:event_jMenuItem3ActionPerformed
+        private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+		frmConsultaMarcacion cons=new frmConsultaMarcacion();
+		jDesktopPane1.add(cons);
+		cons.show();
+        }//GEN-LAST:event_jMenuItem4ActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -179,5 +185,7 @@ public class Principal extends javax.swing.JFrame {
         private javax.swing.JMenuItem jMenuItem1;
         private javax.swing.JMenuItem jMenuItem2;
         private javax.swing.JMenuItem jMenuItem3;
+        private javax.swing.JMenuItem jMenuItem4;
+        private javax.swing.JMenuItem jMenuItem5;
         // End of variables declaration//GEN-END:variables
 }

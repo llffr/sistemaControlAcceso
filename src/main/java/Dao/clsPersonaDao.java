@@ -165,7 +165,7 @@ public class clsPersonaDao {
 
 	public void consultaxFecha(PersonaMod usu) {
 		try {
-			String[] titulo = {"DNI", "APELLIDOS y NOMBRES", "FECHA", "HORA INGRESO", "HORA SALIDA", "HORA INGRESO2", "HORA SALIDA2", "HORAS TOTALES"};
+			String[] titulo = {"DNI", "APELLIDOS y NOMBRES", "FECHA", "HG1", "HS1", "HI2", "HS2", "HORAS TOTALES"};
 			CallableStatement cst = con.prepareCall("{call pa_consultaAsistenciaxFecha(?,?,?)}");
 			DefaultTableModel modelo = new DefaultTableModel(null, titulo);
 			frmConsultaMarcacion.jTable1.setModel(modelo);
