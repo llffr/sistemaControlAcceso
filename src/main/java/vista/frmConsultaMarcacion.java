@@ -39,6 +39,8 @@ public class frmConsultaMarcacion extends javax.swing.JInternalFrame {
                 jLabel3 = new javax.swing.JLabel();
                 txtape = new javax.swing.JTextField();
 
+                setClosable(true);
+
                 jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
                 jLabel1.setText("Desde la fecha:");
 
@@ -84,7 +86,7 @@ public class frmConsultaMarcacion extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtfecha1)
                                         .addComponent(txtfecha2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                                 .addComponent(jLabel3)
@@ -92,9 +94,7 @@ public class frmConsultaMarcacion extends javax.swing.JInternalFrame {
                                                 .addComponent(txtape, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(102, 102, 102))
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

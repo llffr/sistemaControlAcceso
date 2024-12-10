@@ -22,8 +22,6 @@ public class clsConexion {
 			String cadena = "jdbc:sqlserver://localhost:1433;databaseName=SISTEMACONTROLACCESO;"
 				+ "trustServerCertificate=true";
 			conn = DriverManager.getConnection(cadena, usuario, passwd);
-			//JOptionPane.showMessageDialog(null, "conexion exitosa");
-			System.out.println("conexion exitosa");
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "no conexion exitosa" + e.toString());
 		}

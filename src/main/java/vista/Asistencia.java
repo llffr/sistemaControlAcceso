@@ -30,6 +30,8 @@ public class Asistencia extends javax.swing.JInternalFrame {
                 txtdniMarcacion = new javax.swing.JTextField();
                 jPanel2 = new javax.swing.JPanel();
 
+                setClosable(true);
+
                 jLabel1.setText("N° DNI:");
 
                 txtdniMarcacion.addKeyListener(new java.awt.event.KeyAdapter() {

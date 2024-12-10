@@ -30,10 +30,8 @@ public class Principal extends javax.swing.JFrame {
                 jMenu1 = new javax.swing.JMenu();
                 jMenuItem1 = new javax.swing.JMenuItem();
                 jMenuItem2 = new javax.swing.JMenuItem();
-                jMenu2 = new javax.swing.JMenu();
-                Marcación = new javax.swing.JMenuItem();
-                jMenu3 = new javax.swing.JMenu();
-                jMenuItem4 = new javax.swing.JMenuItem();
+                menuAsistencia = new javax.swing.JMenu();
+                menuConsultas = new javax.swing.JMenu();
 
                 jMenuItem3.setText("jMenuItem3");
 
@@ -45,11 +43,11 @@ public class Principal extends javax.swing.JFrame {
                 jDesktopPane1.setLayout(jDesktopPane1Layout);
                 jDesktopPane1Layout.setHorizontalGroup(
                         jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 839, Short.MAX_VALUE)
+                        .addGap(0, 860, Short.MAX_VALUE)
                 );
                 jDesktopPane1Layout.setVerticalGroup(
                         jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 440, Short.MAX_VALUE)
+                        .addGap(0, 452, Short.MAX_VALUE)
                 );
 
                 jMenu1.setText("Tablas");
@@ -72,29 +70,21 @@ public class Principal extends javax.swing.JFrame {
 
                 jMenuBar1.add(jMenu1);
 
-                jMenu2.setText("Proceso");
-
-                Marcación.setText("Marcación");
-                Marcación.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                MarcaciónActionPerformed(evt);
+                menuAsistencia.setText("Asistencia");
+                menuAsistencia.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                menuAsistenciaMouseClicked(evt);
                         }
                 });
-                jMenu2.add(Marcación);
+                jMenuBar1.add(menuAsistencia);
 
-                jMenuBar1.add(jMenu2);
-
-                jMenu3.setText("Consultas");
-
-                jMenuItem4.setText("Fechas");
-                jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                jMenuItem4ActionPerformed(evt);
+                menuConsultas.setText("Consultas");
+                menuConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                menuConsultasMouseClicked(evt);
                         }
                 });
-                jMenu3.add(jMenuItem4);
-
-                jMenuBar1.add(jMenu3);
+                jMenuBar1.add(menuConsultas);
 
                 setJMenuBar(jMenuBar1);
 
@@ -102,13 +92,11 @@ public class Principal extends javax.swing.JFrame {
                 getContentPane().setLayout(layout);
                 layout.setHorizontalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jDesktopPane1)
+                        .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                 );
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jDesktopPane1)
                 );
 
                 pack();
@@ -128,17 +116,17 @@ public class Principal extends javax.swing.JFrame {
 		p1.show();
         }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-        private void MarcaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarcaciónActionPerformed
+        private void menuAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAsistenciaMouseClicked
 		Asistencia asist= new Asistencia();
 		jDesktopPane1.add(asist);
 		asist.show();
-        }//GEN-LAST:event_MarcaciónActionPerformed
+        }//GEN-LAST:event_menuAsistenciaMouseClicked
 
-        private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-		frmConsultaMarcacion cons=new frmConsultaMarcacion();
+        private void menuConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuConsultasMouseClicked
+		frmConsultaMarcacion cons = new frmConsultaMarcacion();
 		jDesktopPane1.add(cons);
 		cons.show();
-        }//GEN-LAST:event_jMenuItem4ActionPerformed
+        }//GEN-LAST:event_menuConsultasMouseClicked
 
 	/**
 	 * @param args the command line arguments
@@ -176,16 +164,14 @@ public class Principal extends javax.swing.JFrame {
 	}
 
         // Variables declaration - do not modify//GEN-BEGIN:variables
-        private javax.swing.JMenuItem Marcación;
         private javax.swing.JDesktopPane jDesktopPane1;
         private javax.swing.JMenu jMenu1;
-        private javax.swing.JMenu jMenu2;
-        private javax.swing.JMenu jMenu3;
         private javax.swing.JMenuBar jMenuBar1;
         private javax.swing.JMenuItem jMenuItem1;
         private javax.swing.JMenuItem jMenuItem2;
         private javax.swing.JMenuItem jMenuItem3;
-        private javax.swing.JMenuItem jMenuItem4;
         private javax.swing.JMenuItem jMenuItem5;
+        private javax.swing.JMenu menuAsistencia;
+        private javax.swing.JMenu menuConsultas;
         // End of variables declaration//GEN-END:variables
 }

@@ -52,7 +52,6 @@ public class frmPersona extends javax.swing.JInternalFrame {
                 txttelf = new javax.swing.JTextField();
                 cmbCargo = new javax.swing.JComboBox<>();
                 btnEliminar = new javax.swing.JButton();
-                btnExit = new javax.swing.JButton();
                 jLabel2 = new javax.swing.JLabel();
                 jLabel3 = new javax.swing.JLabel();
                 jLabel4 = new javax.swing.JLabel();
@@ -61,6 +60,8 @@ public class frmPersona extends javax.swing.JInternalFrame {
                 jLabel7 = new javax.swing.JLabel();
                 jLabel8 = new javax.swing.JLabel();
                 txtclave = new javax.swing.JTextField();
+
+                setClosable(true);
 
                 jLabel1.setText("Nombre del Personal:");
 
@@ -140,13 +141,6 @@ public class frmPersona extends javax.swing.JInternalFrame {
                         }
                 });
 
-                btnExit.setText("Salir");
-                btnExit.addActionListener(new java.awt.event.ActionListener() {
-                        public void actionPerformed(java.awt.event.ActionEvent evt) {
-                                btnExitActionPerformed(evt);
-                        }
-                });
-
                 jLabel2.setText("DNI:");
 
                 jLabel3.setText("Nombre:");
@@ -187,9 +181,6 @@ public class frmPersona extends javax.swing.JInternalFrame {
                                                         .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(btnRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                         .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(11, 11, 11)
-                                                .addComponent(btnExit))
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                         .addComponent(jLabel8)
@@ -239,9 +230,7 @@ public class frmPersona extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel8)
                                         .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(116, 116, 116)
-                                .addComponent(btnExit)
-                                .addGap(43, 43, 43))
+                                .addGap(182, 182, 182))
                 );
 
                 jTabbedPane1.addTab("Registro del Personal", jPanel1);
@@ -291,10 +280,6 @@ public class frmPersona extends javax.swing.JInternalFrame {
 		}
         }//GEN-LAST:event_tbPersonalMouseClicked
 
-        private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-		dispose();
-        }//GEN-LAST:event_btnExitActionPerformed
-
         private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
 		//datos vacios
 		if (txtdni.getText().equals("")) {
@@ -341,7 +326,6 @@ public class frmPersona extends javax.swing.JInternalFrame {
         private javax.swing.JButton btnActualizar;
         private javax.swing.JButton btnBuscar;
         private javax.swing.JButton btnEliminar;
-        private javax.swing.JButton btnExit;
         private javax.swing.JButton btnRegistro;
         public static javax.swing.JComboBox<String> cmbCargo;
         private javax.swing.JLabel jLabel1;
