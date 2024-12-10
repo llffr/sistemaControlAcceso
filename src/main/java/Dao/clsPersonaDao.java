@@ -18,7 +18,7 @@ import vista.frmPersona;
 public class clsPersonaDao {
 
 	clsConexion cn = new clsConexion();
-	Connection con = cn.ConectarDB();
+	Connection con = cn.mysqlConnection();
 	ResultSet rs;
 
 	//login
@@ -50,7 +50,7 @@ public class clsPersonaDao {
 	public void llenarCargo() {
 		try {
 			Statement st = con.createStatement();
-			rs = st.executeQuery("select * from cargo");
+			rs = st.executeQuery("select * from CARGO");
 			frmPersona.cmbCargo.addItem("Seleccione cargo");
 			while (rs.next()) {
 				frmPersona.cmbCargo.addItem(rs.getString("NOMCARGO"));

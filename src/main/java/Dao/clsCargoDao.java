@@ -17,7 +17,7 @@ import vista.frmPersona;
 public class clsCargoDao {
 
 	clsConexion con = new clsConexion();
-	Connection cn = con.ConectarDB();
+	Connection cn = con.mysqlConnection();
 	ResultSet rs;
 
 	public void ListarPersonas() {
@@ -92,6 +92,4 @@ public class clsCargoDao {
 			JOptionPane.showMessageDialog(null, e);
 		}
 	}
-
-
 }

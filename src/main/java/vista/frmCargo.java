@@ -16,6 +16,7 @@ public class frmCargo extends javax.swing.JInternalFrame {
 	public frmCargo() {
 		initComponents();
 		dao.ListarCategoria(); //muestra todos los cargos
+		txtCod.setEditable(false);
 	}
 
 	/**
@@ -35,6 +36,8 @@ public class frmCargo extends javax.swing.JInternalFrame {
                 jScrollPane1 = new javax.swing.JScrollPane();
                 jTable1 = new javax.swing.JTable();
                 btnDelete = new javax.swing.JButton();
+
+                setClosable(true);
 
                 jLabel1.setText("Codigo:");
 

@@ -31,9 +31,9 @@ public class frmLogin extends javax.swing.JFrame {
                 jLabel1 = new javax.swing.JLabel();
                 jLabel2 = new javax.swing.JLabel();
                 txtUsuario = new javax.swing.JTextField();
-                txtClave = new javax.swing.JTextField();
                 jLabel3 = new javax.swing.JLabel();
                 btnLogin = new javax.swing.JButton();
+                txtPasswd = new javax.swing.JPasswordField();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,8 +67,6 @@ public class frmLogin extends javax.swing.JFrame {
                 txtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
                 txtUsuario.setText("12345678");
 
-                txtClave.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
                 jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
                 jLabel3.setText("Password:");
 
@@ -96,9 +94,9 @@ public class frmLogin extends javax.swing.JFrame {
                                                         .addComponent(jLabel2)
                                                         .addComponent(jLabel3))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                        .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                                        .addComponent(txtPasswd))))
                                 .addGap(82, 82, 82))
                 );
                 layout.setVerticalGroup(
@@ -112,10 +110,10 @@ public class frmLogin extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
-                                        .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(42, 42, 42)
+                                        .addComponent(txtPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(31, 31, 31)
                                 .addComponent(btnLogin)
-                                .addContainerGap(59, Short.MAX_VALUE))
+                                .addContainerGap(74, Short.MAX_VALUE))
                 );
 
                 pack();
@@ -124,7 +122,7 @@ public class frmLogin extends javax.swing.JFrame {
 	//login button
         private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 		persmod.setDNI(txtUsuario.getText());
-		persmod.setCLAVE(txtClave.getText());
+		persmod.setCLAVE(txtPasswd.getText());
 
 		if (persdao.AccesoSistema(persmod) == true) {
 			JOptionPane.showMessageDialog(null, "Bienvenido: " + txtUsuario.getText(), "Sistemas", JOptionPane.INFORMATION_MESSAGE);
@@ -177,7 +175,7 @@ public class frmLogin extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel2;
         private javax.swing.JLabel jLabel3;
         private javax.swing.JPanel jPanel2;
-        private javax.swing.JTextField txtClave;
+        private javax.swing.JPasswordField txtPasswd;
         private javax.swing.JTextField txtUsuario;
         // End of variables declaration//GEN-END:variables
 }
