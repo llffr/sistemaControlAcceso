@@ -350,3 +350,117 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+
+--estacionamiento
+CREATE TABLE ESPACIO_ESTACIONAMIENTO (
+  IDESPACIO INT AUTO_INCREMENT PRIMARY KEY,
+  CODIGO VARCHAR(10) UNIQUE,      -- Ej: A1, B2, etc.
+  TIPO VARCHAR(20),               -- 'auto', 'moto', etc.
+  ESTADO BOOLEAN DEFAULT TRUE     -- TRUE: disponible, FALSE: ocupado
+);
+INSERT INTO ESPACIO_ESTACIONAMIENTO (CODIGO, TIPO, ESTADO)
+VALUES 
+('A1', 'auto', TRUE),
+('A2', 'auto', TRUE),
+('B1', 'moto', TRUE),
+('B2', 'moto', TRUE);
+
+CREATE TABLE CONTROLACCESO (
+  IDCONTROL INT AUTO_INCREMENT PRIMARY KEY,
+  DNI VARCHAR(10),
+  IDESPACIO INT,
+  H_INGRESO DATETIME DEFAULT CURRENT_TIMESTAMP,
+  H_SALIDA DATETIME,
+  FOREIGN KEY (DNI) REFERENCES PERSONA(DNI),
+  FOREIGN KEY (IDESPACIO) REFERENCES ESPACIO_ESTACIONAMIENTO(IDESPACIO)
+);
+
+
+-- parking in
+DELIMITER $$
+
+CREATE PROCEDURE sp_ingresarEstacionamiento (
+    IN p_DNI VARCHAR(10),
+    IN p_IDESPACIO INT
+)
+BEGIN
+    DECLARE espacio_disponible BOOLEAN;
+    DECLARE tiene_ingreso_activo INT;
+
+    START TRANSACTION;
+
+    -- 1. Verificar si el usuario ya tiene un ingreso sin salida
+    SELECT COUNT(*) INTO tiene_ingreso_activo
+    FROM CONTROLACCESO
+    WHERE DNI = p_DNI AND H_SALIDA IS NULL
+    FOR UPDATE;
+
+    IF tiene_ingreso_activo > 0 THEN
+        ROLLBACK;
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'El usuario ya tiene un ingreso activo.';
+    ELSE
+        -- 2. Verificar si el espacio está disponible
+        SELECT ESTADO INTO espacio_disponible
+        FROM ESPACIO_ESTACIONAMIENTO
+        WHERE IDESPACIO = p_IDESPACIO
+        FOR UPDATE;
+
+        IF espacio_disponible THEN
+            -- 3. Registrar ingreso
+            INSERT INTO CONTROLACCESO (DNI, IDESPACIO)
+            VALUES (p_DNI, p_IDESPACIO);
+
+            -- 4. Marcar espacio como ocupado
+            UPDATE ESPACIO_ESTACIONAMIENTO
+            SET ESTADO = FALSE
+            WHERE IDESPACIO = p_IDESPACIO;
+
+            COMMIT;
+        ELSE
+            ROLLBACK;
+            SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'El espacio ya está ocupado.';
+        END IF;
+    END IF;
+END$$
+
+DELIMITER ;
+
+-- parking out
+DELIMITER $$
+
+CREATE PROCEDURE sp_salirEstacionamiento (
+    IN p_DNI VARCHAR(10)
+)
+BEGIN
+    DECLARE espacio_ocupado INT;
+
+    START TRANSACTION;
+
+    -- Obtener el último espacio ocupado por la persona
+    SELECT IDESPACIO INTO espacio_ocupado
+    FROM CONTROLACCESO
+    WHERE DNI = p_DNI AND H_SALIDA IS NULL
+    ORDER BY IDCONTROL DESC
+    LIMIT 1
+    FOR UPDATE;
+
+    -- Registrar salida
+    UPDATE CONTROLACCESO
+    SET H_SALIDA = CURRENT_TIMESTAMP
+    WHERE DNI = p_DNI AND H_SALIDA IS NULL;
+
+    -- Liberar espacio
+    UPDATE ESPACIO_ESTACIONAMIENTO
+    SET ESTADO = TRUE
+    WHERE IDESPACIO = espacio_ocupado;
+
+    COMMIT;
+END$$
+
+DELIMITER ;
+
+--on adn off
+select CODIGO, case when ESTADO= 1 then 'Activo' else 'no' END AS LUGAR from ESPACIO_ESTACIONAMIENTO;

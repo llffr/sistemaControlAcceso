@@ -8,9 +8,11 @@ import Modelo.Cargo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.transform.Source;
+import vista.Asistencia;
 import vista.frmCargo;
 import vista.frmPersona;
 
@@ -88,6 +90,36 @@ public class clsCargoDao {
 			if (rpt == 1) {
 				JOptionPane.showMessageDialog(null, "Registro Correctamente...", "Sistemas", JOptionPane.INFORMATION_MESSAGE);
 			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, e);
+		}
+	}
+
+	// estacionamiento
+	public void spaceAvailables() {
+		DefaultTableModel tabla = new DefaultTableModel();
+		String[] titulo = {"CODIGO", "LUGAR"};
+		tabla = new DefaultTableModel(null, titulo);
+
+		try {
+			String query = "SELECT CODIGO, " +
+				"CASE WHEN ESTADO = 1 THEN 'Disponible' ELSE 'Ocupado' END AS LUGAR " +
+				"FROM ESPACIO_ESTACIONAMIENTO";
+
+			Statement stmt = cn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+			while (rs.next()) {
+				Object dato[] = new Object[2];
+				dato[0] = rs.getString("CODIGO");
+				dato[1] = rs.getString("LUGAR");
+
+				tabla.addRow(dato);
+			}
+
+			// add to table
+			Asistencia.tableSpaces.setModel(tabla);
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e);
 		}

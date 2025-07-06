@@ -4,11 +4,13 @@
  */
 package Dao;
 
+import Modelo.Espacio_Estacionamiento;
 import Modelo.PersonaMod;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -125,6 +127,59 @@ public class clsPersonaDao {
 			JOptionPane.showMessageDialog(null, "Error: " + e);
 		}
 	}
+
+	// estacionamienoto: lugar y dni
+	public void chooseParking(PersonaMod p, Espacio_Estacionamiento parking) {
+		try {
+			//tb persona, espacio_estacionamiento
+			CallableStatement cst = con.prepareCall("{call sp_ingresarEstacionamiento(?, ?)}");
+			cst.setString(1, p.getDNI());
+			cst.setInt(2, parking.getIDESPACIO());
+
+			int rpt = cst.executeUpdate();
+
+			//evalua si se ingreso datos
+			if (rpt == 1) {
+				JOptionPane.showMessageDialog(null, "Registrado Correctamente", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error: " + e);
+		}
+	}
+
+	public void exitParking(PersonaMod p) {
+		try {
+			//tb persona, espacio_estacionamiento
+			CallableStatement cst = con.prepareCall("{call sp_salirEstacionamiento(?)}");
+			cst.setString(1, p.getDNI());
+
+			int rpt = cst.executeUpdate();
+
+			//evalua si se ingreso datos
+			if (rpt == 1) {
+				JOptionPane.showMessageDialog(null, "Registrado Correctamente", "Sistema", JOptionPane.INFORMATION_MESSAGE);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error: " + e);
+		}
+	}
+
+	public boolean hasActiveEntry(String dni) {
+		boolean result = false;
+		try {
+			PreparedStatement ps = con.prepareStatement(
+					"SELECT COUNT(*) FROM CONTROLACCESO WHERE DNI = ? AND H_SALIDA IS NULL");
+			ps.setString(1, dni);
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt(1) > 0;
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error al verificar ingreso activo: " + e.getMessage());
+		}
+		return result;
+	}
+	// end parking
 
 	public void actualizarPersonal(PersonaMod p) {
 		try {
